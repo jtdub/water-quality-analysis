@@ -34,4 +34,58 @@ def check_water_quality(params: WaterQualityParameters) -> dict:
             if 6.5 <= params.ph <= 8.5
             else "pH is outside the normal range."
         )
+    if params.salinity is not None:
+        results["salinity"] = (
+            "Salinity is within normal levels (0 to 35 PSU)."
+            if 0 <= params.salinity <= 35
+            else "Salinity is outside the normal range."
+        )
+    if params.ammonia is not None:
+        results["ammonia"] = (
+            "Ammonia is within safe levels (0 to 0.05 mg/L)."
+            if 0 <= params.ammonia <= 0.05
+            else "Ammonia is outside safe levels and can be toxic."
+        )
+    if params.nitrate is not None:
+        results["nitrate"] = (
+            "Nitrate is within safe levels (0 to 10 mg/L)."
+            if 0 <= params.nitrate <= 10
+            else "Nitrate is outside safe levels and can cause eutrophication."
+        )
+    if params.nitrite is not None:
+        results["nitrite"] = (
+            "Nitrite is within safe levels (0 to 1 mg/L)."
+            if 0 <= params.nitrite <= 1
+            else "Nitrite is outside safe levels and can harm aquatic life."
+        )
+    if params.phosphate is not None:
+        results["phosphate"] = (
+            "Phosphate is within safe levels (0 to 0.1 mg/L)."
+            if 0 <= params.phosphate <= 0.1
+            else "Phosphate is outside safe levels and can cause eutrophication."
+        )
+    if params.tds is not None:
+        results["tds"] = (
+            "TDS is within acceptable range (0 to 1000 mg/L)."
+            if 0 <= params.tds <= 1000
+            else "TDS is outside acceptable range."
+        )
+    if params.chlorine is not None:
+        results["chlorine"] = (
+            "Chlorine is within safe levels (0 to 4 mg/L)."
+            if 0 <= params.chlorine <= 4
+            else "Chlorine is outside safe levels and can be toxic."
+        )
+    if params.hardness is not None:
+        results["hardness"] = (
+            "Hardness is within acceptable levels (0 to 180 mg/L)."
+            if 0 <= params.hardness <= 180
+            else "Hardness is outside acceptable levels."
+        )
+    if params.alkalinity is not None:
+        results["alkalinity"] = (
+            "Alkalinity is within acceptable range (20 to 200 mg/L)."
+            if 20 <= params.alkalinity <= 200
+            else "Alkalinity is outside acceptable range."
+        )
     return results

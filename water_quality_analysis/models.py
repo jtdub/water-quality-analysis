@@ -11,3 +11,14 @@ class WaterQualityParameters(BaseModel):
     conductivity: float | None = Field(None, description="Conductivity in µS/cm.")
     turbidity: float | None = Field(None, description="Turbidity in NTU.")
     ph: float | None = Field(None, description="pH level.")
+    salinity: float | None = Field(None, description="Salinity in PSU or ppt.")
+    ammonia: float | None = Field(None, description="Ammonia concentration in mg/L.")
+    nitrate: float | None = Field(None, description="Nitrate concentration in mg/L.")
+    nitrite: float | None = Field(None, description="Nitrite concentration in mg/L.")
+    phosphate: float | None = Field(
+        None, description="Phosphate concentration in mg/L."
+    )
+    tds: float | None = Field(None, description="Total Dissolved Solids in mg/L.")
+    chlorine: float | None = Field(None, description="Chlorine concentration in mg/L.")
+    hardness: float | None = Field(None, description="Water hardness in mg/L as CaCO3.")
+    alkalinity: float | None = Field(None, description="Alkalinity in mg/L as CaCO3.")
