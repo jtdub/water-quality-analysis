@@ -1,4 +1,7 @@
-from wqautils.models import WaterQualityParameters
+from wqautils.models import (
+    WaterQualityParameters,
+    WaterQualityResult,
+)
 from wqautils.utils import check_water_quality
 
 
@@ -7,14 +10,8 @@ def test_check_water_quality_valid():
         temperature=20, dissolved_oxygen=8, conductivity=500, turbidity=2, ph=7
     )
     results = check_water_quality(params)
-    assert (
-        results["temperature"]
-        == "Temperature is within the normal range (0°C to 35°C)."
-    )
-    assert (
-        results["dissolved_oxygen"]
-        == "Dissolved oxygen is within the normal range (5 to 14 mg/L)."
-    )
+    assert results.temperature.status == "OK"
+    assert results.dissolved_oxygen.status == "OK"
 
 
 def test_check_water_quality_invalid():
@@ -22,14 +19,15 @@ def test_check_water_quality_invalid():
         temperature=50, dissolved_oxygen=2, conductivity=2000, turbidity=10, ph=5
     )
     results = check_water_quality(params)
-    assert "outside the normal range" in results["temperature"]
-    assert "outside the normal range" in results["dissolved_oxygen"]
+    assert results.temperature.status == "Alert"
+    assert results.dissolved_oxygen.status == "Alert"
 
 
 def test_partial_parameters():
     params = WaterQualityParameters(temperature=25)
     results = check_water_quality(params)
-    assert "temperature" in results and "dissolved_oxygen" not in results
+    assert results.temperature is not None
+    assert results.dissolved_oxygen is None
 
 
 def test_all_parameters():
@@ -51,8 +49,8 @@ def test_all_parameters():
     )
     results = check_water_quality(params)
     assert all(
-        key in results
-        for key in [
+        isinstance(getattr(results, attr), WaterQualityResult)
+        for attr in [
             "temperature",
             "dissolved_oxygen",
             "conductivity",
