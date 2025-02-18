@@ -24,3 +24,28 @@ def test_check_water_quality_invalid():
     results = check_water_quality(params)
     assert "outside the normal range" in results["temperature"]
     assert "outside the normal range" in results["dissolved_oxygen"]
+
+
+
+
+def test_partial_parameters():
+    params = WaterQualityParameters(temperature=25)
+    results = check_water_quality(params)
+    assert "temperature" in results and "dissolved_oxygen" not in results
+
+
+def test_all_parameters():
+    params = WaterQualityParameters(
+        temperature=20, dissolved_oxygen=8, conductivity=500, turbidity=2, ph=7
+    )
+    results = check_water_quality(params)
+    assert all(
+        key in results
+        for key in [
+            "temperature",
+            "dissolved_oxygen",
+            "conductivity",
+            "turbidity",
+            "ph",
+        ]
+    )
