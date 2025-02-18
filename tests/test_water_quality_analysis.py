@@ -1,5 +1,5 @@
-from water_quality_analysis.models import WaterQualityParameters
-from water_quality_analysis.utils import check_water_quality
+from wqautils.models import WaterQualityParameters
+from wqautils.utils import check_water_quality
 
 
 def test_check_water_quality_valid():

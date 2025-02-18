@@ -1,4 +1,4 @@
-# Water Quality Analysis
+# Water Quality Analysis Utils
 
 This Python package provides tools for analyzing water quality parameters such as temperature, dissolved oxygen, conductivity, turbidity, and pH using Pydantic for validation.
 
@@ -15,7 +15,7 @@ poetry install
 
 ## Usage
 ```python
-from water_quality_analysis import WaterQualityParameters, check_water_quality
+from wqautils import WaterQualityParameters, check_water_quality
 params = WaterQualityParameters(temperature=20, dissolved_oxygen=8, conductivity=500, turbidity=2, ph=7)
 results = check_water_quality(params)
 print(results)
