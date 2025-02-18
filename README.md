@@ -10,7 +10,7 @@ This Python package provides tools for analyzing water quality parameters such a
 
 ## Installation
 ```bash
-poetry install
+pip install wqautils
 ```
 
 ## Usage
